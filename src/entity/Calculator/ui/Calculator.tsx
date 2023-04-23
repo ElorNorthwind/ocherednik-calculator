@@ -38,10 +38,10 @@ function Calculator(props: CalculatorProps) {
   );
 
   const result =
-    (seriesChoice?.scale || 1) *
-    (wearChoice?.scale || 1) *
-    (areaChoice?.scale || 1) *
-    (objectTypeChoice?.scale || 1) *
+    (seriesChoice?.scale || 0) *
+    (wearChoice?.scale || 0) *
+    (areaChoice?.scale || 0) *
+    (objectTypeChoice?.scale || 0) *
     (Number(meters) || 0);
 
   return (
