@@ -3,8 +3,6 @@ import AppListbox from "@/shared/ui/AppListBox/AppListBox";
 import { useState } from "react";
 import { ChoiceOption, Scales } from "@/shared/config/scales";
 import AppLabel from "@/shared/ui/AppLabel/AppLabel";
-import { ReactComponent as HumanIcon } from "@/shared/assets/icons/moneyHuman.svg";
-import { ReactComponent as PcIcon } from "@/shared/assets/icons/moneyPc.svg";
 import Results from "./Results";
 
 interface CalculatorProps {
