@@ -20,6 +20,8 @@
   }
 }
 
-body {
-  @apply bg-stone-300;
+body,
+#root {
+  @apply bg-stone-300 min-h-screen h-full relative;
+  min-height: -webkit-fill-available;
 }
