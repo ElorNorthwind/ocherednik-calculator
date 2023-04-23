@@ -14,7 +14,10 @@ export default function Layout(props: LayoutProps) {
         <CalculatorIcon className="h-6 w-6" />
         <p>Расчёт стоимости ипотеки</p>
       </div>
-      <main className="w-full p-6">{children}</main>
+      <main className="w-full px-6 mb-6">{children}</main>
+      {/* <div className="bg-stone-500 w-full py-2 px-6 text-white flex gap-2">
+        <p>Расчёт стоимости ипотеки</p>
+      </div> */}
     </PageWrapper>
   );
 }

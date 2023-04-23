@@ -5,16 +5,16 @@ type HTMLInputProps = Omit<
   "value" | "onChange" | "placeholder" | "readOnly"
 >;
 
-interface InputProps extends HTMLInputProps {
+interface AppInputProps extends HTMLInputProps {
   className?: string;
   value?: string | number;
-  onChange?: (value: string) => void;
+  onChange?: (value: string | number) => void;
   autoFocus?: boolean;
   placeholder?: string | null;
   readOnly?: boolean;
 }
 
-const Input = memo((props: InputProps) => {
+const AppInput = memo((props: AppInputProps) => {
   const {
     className,
     value,
@@ -32,7 +32,7 @@ const Input = memo((props: InputProps) => {
 
   return (
     <input
-      className={`${className} bg-stone-100 rounded px-2 py-1 appearance-none hover:bg-stone-200 active:bg-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500 text-stone-700`}
+      className={`${className} w-full relative bg-stone-100 rounded px-2 py-1 appearance-none hover:bg-stone-200 active:bg-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500 text-stone-700`}
       type={type}
       value={type === "number" ? Number(value) : String(value)}
       onChange={onChangeHandler}
@@ -44,4 +44,4 @@ const Input = memo((props: InputProps) => {
   );
 });
 
-export default Input;
+export default AppInput;
