@@ -32,7 +32,7 @@ function Calculator(props: CalculatorProps) {
       setAoChoice(ao.find((a) => a.id === value?.parentId) || null);
     }
   };
-  const [meters, setMeters] = useState<string | number>(0);
+  const [meters, setMeters] = useState<string | number | null>(null);
   const [objectTypeChoice, setObjectTypeChoice] = useState<ChoiceOption | null>(
     objectType[0]
   );
