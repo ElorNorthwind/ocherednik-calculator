@@ -1,5 +1,6 @@
 import { ReactComponent as HumanIcon } from "@/shared/assets/icons/moneyHuman.svg";
 import { ReactComponent as PcIcon } from "@/shared/assets/icons/moneyPc.svg";
+import AppIcon from "@/shared/ui/AppIcon/AppIcon";
 
 interface ResultsProps {
   result: number;
@@ -10,13 +11,13 @@ function Results(props: ResultsProps) {
   const { className, result } = props;
   const fullData = result > 0;
 
-  const icon = fullData ? (
-    <HumanIcon
-      className={`h-24 w-24 stroke-[0.3] stroke-red-800 hidden md:block`}
-    />
-  ) : (
-    <PcIcon
-      className={`h-24 w-24 stroke-[0.3] stroke-red-800 hidden md:block`}
+  const icon = (
+    <AppIcon
+      Svg={fullData ? HumanIcon : PcIcon}
+      bgClass="bg-orange-100"
+      iconClass="stroke-orange-800"
+      hasBg={true}
+      className="hidden md:block"
     />
   );
 
@@ -32,9 +33,7 @@ function Results(props: ResultsProps) {
       </span>
     </span>
   ) : (
-    <span className={`w-full`}>
-      Заполните характеристики для расчёта примерной стоимости
-    </span>
+    <span className={`w-full`}>Заполните характеристики для расчёта примерной стоимости</span>
   );
 
   return (
