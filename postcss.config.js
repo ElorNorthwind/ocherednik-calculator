@@ -1,6 +1,6 @@
 export default {
   plugins: {
-    "postcss-100vh-fix": {},
+    "postcss-viewport-height-correction": {},
     tailwindcss: {},
     autoprefixer: {},
   },
