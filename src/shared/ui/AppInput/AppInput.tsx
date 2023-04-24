@@ -1,9 +1,6 @@
 import { InputHTMLAttributes, memo } from "react";
 
-type HTMLInputProps = Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "value" | "onChange" | "placeholder" | "readOnly"
->;
+type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange" | "placeholder" | "readOnly">;
 
 interface AppInputProps extends HTMLInputProps {
   className?: string;
@@ -32,7 +29,7 @@ const AppInput = memo((props: AppInputProps) => {
 
   return (
     <input
-      className={`${className} w-full relative bg-stone-100 rounded px-2 py-1 appearance-none hover:bg-stone-200 active:bg-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500 text-stone-700`}
+      className={`${className} w-full relative bg-stone-100 rounded px-2 py-1 md:px-3 md:py-2 appearance-none hover:bg-stone-200 active:bg-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500 text-stone-700`}
       type={type}
       value={String(value)} //{type === "number" ? Number(value) : String(value)}
       onChange={onChangeHandler}

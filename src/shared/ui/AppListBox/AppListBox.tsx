@@ -17,7 +17,7 @@ function AppListbox({ items, selectedItem, onChange, className, readOnly }: AppL
       <Listbox value={selectedItem} by="id" onChange={onChange} disabled={readOnly}>
         <div className="relative">
           <Listbox.Button
-            className={`text-left w-full bg-stone-100 text-stone-700 rounded px-2 py-1 appearance-none ${
+            className={`text-left w-full bg-stone-100 text-stone-700 rounded px-2 py-1 md:px-3 md:py-2 appearance-none ${
               !readOnly && "hover:bg-stone-200 active:bg-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500"
             }  `}
           >

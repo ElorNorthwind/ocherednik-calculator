@@ -1,5 +1,5 @@
-import { ReactComponent as HumanIcon } from "@/shared/assets/icons/moneyHuman.svg";
-import { ReactComponent as PcIcon } from "@/shared/assets/icons/moneyPc.svg";
+import { ReactComponent as SearchIcon } from "@/shared/assets/icons/moneySearch.svg";
+import { ReactComponent as PointIcon } from "@/shared/assets/icons/moneyPoint.svg";
 import AppIcon from "@/shared/ui/AppIcon/AppIcon";
 
 interface ResultsProps {
@@ -13,8 +13,8 @@ function Results(props: ResultsProps) {
 
   const icon = (
     <AppIcon
-      Svg={fullData ? HumanIcon : PcIcon}
-      bgClass="bg-orange-100"
+      Svg={fullData ? PointIcon : SearchIcon}
+      bgClass="bg-orange-100 group-hover:scale-110 transition-transform duration-200"
       iconClass="stroke-orange-800"
       hasBg={true}
       className="hidden md:block"
@@ -38,7 +38,7 @@ function Results(props: ResultsProps) {
 
   return (
     <div
-      className={`${className} w-full mt-6 p-6 bg-orange-50 grid grid-cols-1 md:grid-cols-[max-content_1fr] items-center gap-3 md:gap-6 overflow-hidden`}
+      className={`${className} group w-full mt-6 p-6 bg-orange-50 grid grid-cols-1 md:grid-cols-[max-content_1fr] items-center gap-3 md:gap-6 overflow-hidden`}
     >
       {icon}
       {text}

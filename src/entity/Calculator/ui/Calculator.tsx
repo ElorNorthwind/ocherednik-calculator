@@ -44,9 +44,9 @@ function Calculator(props: CalculatorProps) {
 
   return (
     <div className={`${className}`}>
-      <h1 className="text-3xl mt-3 mb-1 font-serif text-red-600">Характеристики для расчёта</h1>
+      <h1 className="text-2xl md:text-3xl mt-3 mb-1 font-serif text-red-600">Характеристики для расчёта</h1>
       <form
-        className={`border-t pt-3 border-stone-400 grid gap-0 md:gap-1 items-center grid-cols-1 md:grid-cols-[max-content_1fr] xl:grid-cols-[max-content_1fr_max-content_1fr]`}
+        className={`border-t pt-3 border-stone-400 grid gap-0 md:gap-2 items-center grid-cols-1 md:grid-cols-[max-content_1fr]`}
       >
         <AppLabel text="лет на учёте" />
         <AppListbox items={years} selectedItem={yearsChoice} onChange={setYearsChoice} />
