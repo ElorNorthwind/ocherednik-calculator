@@ -12,8 +12,9 @@ interface CalculatorProps {
 
 function Calculator(props: CalculatorProps) {
   const { className, scales } = props;
-  const { years, repairs, wear, series, ao, area } = scales;
+  const { years, komn, repairs, wear, series, ao, area } = scales;
 
+  const [komnChoice, setKomnChoice] = useState<ChoiceOption | null>(komn[0]);
   const [yearsChoice, setYearsChoice] = useState<ChoiceOption | null>(null);
   const [seriesChoice, setSeriesChoice] = useState<ChoiceOption | null>(null);
   const [wearChoice, setWearChoice] = useState<ChoiceOption | null>(null);
@@ -43,10 +44,10 @@ function Calculator(props: CalculatorProps) {
     (Number(meters) || 0);
 
   return (
-    <div className={`${className}`}>
-      <h1 className="text-2xl md:text-3xl mt-3 mb-1 font-serif text-red-600">Характеристики для расчёта</h1>
+    <div className={`${className} my-3`}>
+      <h1 className="text-2xl md:text-3xl mb-1 font-serif text-red-600">Характеристики для расчёта</h1>
       <form
-        className={`border-t pt-3 border-stone-400 grid gap-0 md:gap-2 items-center grid-cols-1 md:grid-cols-[max-content_1fr]`}
+        className={`border-t pt-3 border-stone-400 grid  gap-0 md:gap-2 print:gap-2 items-center grid-cols-1 md:grid-cols-[max-content_1fr] print:grid-cols-[max-content_1fr] `}
       >
         <AppLabel text="лет на учёте" />
         <AppListbox items={years} selectedItem={yearsChoice} onChange={setYearsChoice} />
@@ -75,8 +76,11 @@ function Calculator(props: CalculatorProps) {
         <AppLabel text="площадь квартиры" />
         <AppInput value={meters} type="number" onChange={setMeters} />
 
+        <AppLabel text="тип помещения" />
+        <AppListbox items={komn} selectedItem={komnChoice} onChange={setKomnChoice} />
+
         <AppLabel text="состояние квартиры" />
-        <AppListbox items={repairs} selectedItem={repairsChoice} onChange={setRepairsChoice} readOnly={true} />
+        <AppListbox items={repairs} selectedItem={repairsChoice} onChange={setRepairsChoice} />
       </form>
       <Results result={result} />
     </div>

@@ -10,11 +10,11 @@ export default function Layout(props: LayoutProps) {
   const { children } = props;
   return (
     <PageWrapper>
-      <div className="bg-red-600 w-full py-2 px-6 text-white flex gap-2">
+      <div className="bg-red-600 w-full h-8 px-6 text-white flex items-center gap-2 print:hidden">
         <CalculatorIcon className="h-6 w-6" />
         <p>Расчёт стоимости ипотеки</p>
       </div>
-      <main className="w-full px-6 mb-6">{children}</main>
+      <main className="w-full min-h-[calc(100vh-3.5rem)] relative px-6 flex flex-col justify-between">{children}</main>
       {/* <div className="bg-stone-500 w-full py-2 px-6 text-white flex gap-2">
         <p>Расчёт стоимости ипотеки</p>
       </div> */}

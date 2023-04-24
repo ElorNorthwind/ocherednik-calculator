@@ -22,6 +22,6 @@
 
 body,
 #root {
-  @apply bg-stone-300 min-h-screen h-full relative;
+  @apply bg-stone-300 min-h-screen h-full relative print:bg-white;
   min-height: -webkit-fill-available;
 }

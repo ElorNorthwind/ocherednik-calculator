@@ -26,7 +26,7 @@ function AppListbox({ items, selectedItem, onChange, className, readOnly }: AppL
             </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronDownIcon
-                className={`h-5 w-5 text-stone-400 ${readOnly && "text-stone-300"}`}
+                className={`h-5 w-5 text-stone-400 ${readOnly && "text-stone-300"} print:hidden`}
                 aria-hidden="true"
               />
             </span>

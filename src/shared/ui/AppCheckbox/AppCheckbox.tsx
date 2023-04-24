@@ -1,10 +1,7 @@
 import { CheckIcon } from "@heroicons/react/20/solid";
 import { InputHTMLAttributes, memo } from "react";
 
-type HTMLInputProps = Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "value" | "onChange" | "readOnly"
->;
+type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange" | "readOnly">;
 
 interface AppCheckboxProps extends HTMLInputProps {
   className?: string;
@@ -45,12 +42,7 @@ const AppCheckbox = memo((props: AppCheckboxProps) => {
       />
 
       <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pr-2">
-        <CheckIcon
-          className={`h-6 w-6 text-stone-400 ${
-            checked ? "opacity-100" : "opacity-0"
-          }`}
-          aria-hidden="true"
-        />
+        <CheckIcon className={`h-6 w-6 text-stone-400 ${checked ? "opacity-100" : "opacity-0"}`} aria-hidden="true" />
       </span>
       <label>{checked ? trueText : falseText}</label>
     </span>

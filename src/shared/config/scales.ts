@@ -26,7 +26,7 @@ const years: ChoiceOption[] = [
 
 const komn: ChoiceOption[] = [
   { id: 1, name: "отдельная квартира", unavailable: false, scale: 1.0 },
-  { id: 2, name: "комната", unavailable: true, scale: 0.8 },
+  { id: 2, name: "комната или доля", unavailable: false, scale: 0.8 },
 ];
 
 const wear: ChoiceOption[] = [
@@ -208,7 +208,7 @@ const area: ChoiceOption[] = [
 
 const repairs: ChoiceOption[] = [
   { id: 1, name: "не требует ремонта", unavailable: false, scale: 1.0 },
-  { id: 2, name: "требуется ремонт", unavailable: true, scale: 0.75 },
+  { id: 2, name: "требуется ремонт", unavailable: false, scale: 0.75 },
 ];
 
 export const scales: Scales = { years, komn, wear, series, ao, area, repairs };
