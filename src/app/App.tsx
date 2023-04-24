@@ -6,7 +6,7 @@ function App() {
   return (
     <Layout>
       <Calculator scales={scales} />
-      <div className="w-full text-xs tracking-tight text-stone-600 mb-3">
+      <div className="w-full text-xs tracking-tight text-stone-600 mb-3 hidden md:block">
         Расчёт стоимости осуществляется в соответствии с{" "}
         <a
           className="font-semibold text-stone-500"
