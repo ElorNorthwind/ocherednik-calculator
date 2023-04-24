@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ChoiceOption, Scales } from "@/shared/config/scales";
 import AppLabel from "@/shared/ui/AppLabel/AppLabel";
 import Results from "./Results";
+import { FaceSmileIcon } from "@heroicons/react/20/solid";
 
 interface CalculatorProps {
   className?: string;
@@ -58,11 +59,17 @@ function Calculator(props: CalculatorProps) {
         <AppListbox items={wear} selectedItem={wearChoice} onChange={setWearChoice} />
 
         <AppLabel text="округ" />
-        <AppListbox items={ao} selectedItem={aoChoice} onChange={onAoChange} />
+        <AppListbox items={ao.filter((a) => a.unavailable === false)} selectedItem={aoChoice} onChange={onAoChange} />
 
         <AppLabel text="район" />
         <AppListbox
-          items={aoChoice ? area.filter((a) => a.parentId === aoChoice.id) : area}
+          items={
+            aoChoice
+              ? area.filter((a) => a.parentId === aoChoice.id)
+              : area.filter((a) =>
+                  ao.filter((okrug) => okrug.unavailable === false).some((okrug) => okrug.id === a.parentId)
+                )
+          }
           selectedItem={areaChoice}
           onChange={onAreaChange}
         />
