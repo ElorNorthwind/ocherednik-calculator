@@ -4,7 +4,6 @@ import { useState } from "react";
 import { ChoiceOption, Scales } from "@/shared/config/scales";
 import AppLabel from "@/shared/ui/AppLabel/AppLabel";
 import Results from "./Results";
-import { FaceSmileIcon } from "@heroicons/react/20/solid";
 
 interface CalculatorProps {
   className?: string;
