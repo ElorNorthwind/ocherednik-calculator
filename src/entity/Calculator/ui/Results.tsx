@@ -18,7 +18,6 @@ function Results(props: ResultsProps) {
       iconClass="stroke-orange-800"
       hasBg={true}
       className="hidden md:block"
-      size={24}
     />
   );
 
