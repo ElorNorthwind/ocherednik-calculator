@@ -12,11 +12,10 @@ interface CalculatorProps {
 
 function Calculator(props: CalculatorProps) {
   const { className, scales } = props;
-  const { objectType, wear, series, ao, area } = scales;
+  const { years, repairs, wear, series, ao, area } = scales;
 
-  const [seriesChoice, setSeriesChoice] = useState<ChoiceOption | null>(
-    series[0]
-  );
+  const [yearsChoice, setYearsChoice] = useState<ChoiceOption | null>(null);
+  const [seriesChoice, setSeriesChoice] = useState<ChoiceOption | null>(null);
   const [wearChoice, setWearChoice] = useState<ChoiceOption | null>(null);
   const [aoChoice, setAoChoice] = useState<ChoiceOption | null>(null);
   const onAoChange = (value: ChoiceOption | null) => {
@@ -33,60 +32,45 @@ function Calculator(props: CalculatorProps) {
     }
   };
   const [meters, setMeters] = useState<string | number | null>(null);
-  const [objectTypeChoice, setObjectTypeChoice] = useState<ChoiceOption | null>(
-    objectType[0]
-  );
+  const [repairsChoice, setRepairsChoice] = useState<ChoiceOption | null>(repairs[0]);
 
   const result =
     (seriesChoice?.scale || 0) *
+    (yearsChoice?.scale || 0) *
     (wearChoice?.scale || 0) *
     (areaChoice?.scale || 0) *
-    (objectTypeChoice?.scale || 0) *
+    (repairsChoice?.scale || 0) *
     (Number(meters) || 0);
 
   return (
     <div className={`${className}`}>
-      <h1 className="text-3xl mt-3 mb-1 font-serif text-red-600">
-        Характеристики для расчёта
-      </h1>
+      <h1 className="text-3xl mt-3 mb-1 font-serif text-red-600">Характеристики для расчёта</h1>
       <form
         className={`border-t pt-3 border-stone-400 grid gap-0 md:gap-1 items-center grid-cols-1 md:grid-cols-[max-content_1fr] xl:grid-cols-[max-content_1fr_max-content_1fr]`}
       >
+        <AppLabel text="лет на учёте" />
+        <AppListbox items={years} selectedItem={yearsChoice} onChange={setYearsChoice} />
+
         <AppLabel text="серия дома" />
-        <AppListbox
-          items={series}
-          selectedItem={seriesChoice}
-          onChange={setSeriesChoice}
-        />
+        <AppListbox items={series} selectedItem={seriesChoice} onChange={setSeriesChoice} />
 
         <AppLabel text="срок эксплуатации" />
-        <AppListbox
-          items={wear}
-          selectedItem={wearChoice}
-          onChange={setWearChoice}
-        />
+        <AppListbox items={wear} selectedItem={wearChoice} onChange={setWearChoice} />
 
         <AppLabel text="округ" />
         <AppListbox items={ao} selectedItem={aoChoice} onChange={onAoChange} />
 
         <AppLabel text="район" />
         <AppListbox
-          items={
-            aoChoice ? area.filter((a) => a.parentId === aoChoice.id) : area
-          }
+          items={aoChoice ? area.filter((a) => a.parentId === aoChoice.id) : area}
           selectedItem={areaChoice}
           onChange={onAreaChange}
         />
         <AppLabel text="площадь квартиры" />
         <AppInput value={meters} type="number" onChange={setMeters} />
 
-        <AppLabel text="тип помещения" />
-        <AppListbox
-          items={objectType}
-          selectedItem={objectTypeChoice}
-          onChange={setObjectTypeChoice}
-          readOnly={true}
-        />
+        <AppLabel text="состояние квартиры" />
+        <AppListbox items={repairs} selectedItem={repairsChoice} onChange={setRepairsChoice} readOnly={true} />
       </form>
       <Results result={result} />
     </div>

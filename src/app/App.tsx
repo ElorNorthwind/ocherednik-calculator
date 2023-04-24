@@ -1,4 +1,4 @@
-import Calculator from "@/entity/Calculator/ui/Calculator";
+import { Calculator } from "@/entity/Calculator";
 import { scales } from "@/shared/config/scales";
 import Layout from "@/widgets/Layout/Layout";
 
