@@ -2,7 +2,6 @@ import { Calculator } from "@/entity/Calculator";
 import { scales } from "@/shared/config/scales";
 import { useFizScreenSize } from "@/shared/lib/hooks/useFixScreenSize";
 import Layout from "@/widgets/Layout/Layout";
-import { useEffect } from "react";
 
 function App() {
   useFizScreenSize();
