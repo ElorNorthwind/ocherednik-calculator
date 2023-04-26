@@ -4,6 +4,18 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    height: (theme) => ({
+      auto: "auto",
+      ...theme("spacing"),
+      full: "100%",
+      screen: "calc(var(--vh) * 100)",
+    }),
+    minHeight: (theme) => ({
+      0: "0",
+      ...theme("spacing"),
+      full: "100%",
+      screen: "calc(var(--vh) * 100)",
+    }),
     extend: {
       fontFamily: {
         sans: [
@@ -23,15 +35,7 @@ export default {
           '"Segoe UI Symbol"',
           '"Noto Color Emoji"',
         ],
-        serif: [
-          '"PT Serif"',
-          "ui-serif",
-          "Georgia",
-          "Cambria",
-          '"Times New Roman"',
-          "Times",
-          "serif",
-        ],
+        serif: ['"PT Serif"', "ui-serif", "Georgia", "Cambria", '"Times New Roman"', "Times", "serif"],
       },
     },
   },

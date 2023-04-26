@@ -8,19 +8,18 @@ interface AppBadgeProps {
 
 const AppBadge = memo((props: AppBadgeProps) => {
   const { className, title = "", text = "" } = props;
-
-  if (text === "") {
-    return (
-      <div className={`${className} flex flex-col`}>
-        <span className={`text-stone-400 text-left mr-1 block`}>{title}</span>
-      </div>
-    );
-  }
+  const textShown = text !== "";
 
   return (
     <div className={`${className} flex flex-col`}>
-      <span className={`text-stone-400 text-left mr-1 block text-sm -mb-1`}>{title}:</span>
-      <span className={`text-red-600 font-bold block`}>{text}</span>
+      <span
+        className={`text-stone-400 text-left mr-1 block transition-transform duration-300 ${
+          textShown && "text-sm -mb-1"
+        }`}
+      >
+        {textShown ? title + ":" : title}
+      </span>
+      {textShown && <span className={`text-red-600 font-bold block`}>{text}</span>}
     </div>
   );
 });
