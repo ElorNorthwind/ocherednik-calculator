@@ -24,7 +24,11 @@ function Results(props: ResultsProps) {
   const text = fullData ? (
     <span className={`flex justify-between flex-col w-full`}>
       <span className={`block print:text-right`}>Примерная стоимость помещения:</span>
-      <span className={`block text-4xl text-red-600 whitespace-nowrap print:text-right`}>
+      <span
+        className={`block text-4xl text-red-600 whitespace-nowrap print:text-right transition-opacity duration-500 ${
+          fullData ? "opacity-100" : "opacity-0"
+        }`}
+      >
         {"≈ "}
         {new Intl.NumberFormat("ru-RU", {
           style: "currency",

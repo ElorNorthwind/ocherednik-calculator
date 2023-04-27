@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function useFizScreenSize() {
+export function useFixScreenSize() {
   function handleResize() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
