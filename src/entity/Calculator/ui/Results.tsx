@@ -50,12 +50,10 @@ function Results(props: ResultsProps) {
     <div
       className={`${className} min-h-28 relative group w-full mt-3 p-6 bg-orange-50 grid grid-cols-1 md:grid-cols-[max-content_1fr] items-center gap-3 md:gap-6 overflow-hidden print:border-t print:border-stone-400`}
     >
-      {fullData && (
         <PrinterIcon
-          className="z-3 h-12 w-12 absolute right-3 top-3 stroke-orange-200 stroke-[1.6] hidden print:opacity-0 group-hover:block cursor-pointer"
+          className={`z-3 h-12 w-12 absolute right-3 top-3 stroke-orange-200 stroke-[1.6] block transition-opacity duration-300 ${fullData ? "print:hidden cursor-pointer opacity-100" : "opacity-0"}`}
           onClick={() => window.print()}
         />
-      )}
       {icon}
       {text}
     </div>
