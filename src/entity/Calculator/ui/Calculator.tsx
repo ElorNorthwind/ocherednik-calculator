@@ -60,6 +60,7 @@ function Calculator(props: CalculatorProps) {
           labelText="район"
           badgeTitle="Ктерр"
           type="coeficient"
+          isCombobox={true}
           items={
             aoChoice
               ? area.filter((a) => a.parentId === aoChoice.id)
