@@ -1,5 +1,6 @@
 import { ChoiceOption } from "@/shared/config/scales";
 import AppBadge from "@/shared/ui/AppBadge/AppBadge";
+import AppCombobox from "@/shared/ui/AppCombobox/AppCombobox";
 import AppInput from "@/shared/ui/AppInput/AppInput";
 import AppLabel from "@/shared/ui/AppLabel/AppLabel";
 import AppListbox from "@/shared/ui/AppListBox/AppListBox";
@@ -11,6 +12,7 @@ interface ListboxCalculatorFieldProps {
   onChange: (value: ChoiceOption | null) => void;
   labelText: string;
   badgeTitle: string;
+  isCombobox?: boolean;
 }
 
 interface NumberCalculatorFieldProps {
@@ -27,7 +29,13 @@ export default function CalculatorField(props: CalculatorFieldProps) {
   const Label = <AppLabel text={props?.labelText} />;
   let Input;
   if (props.type === "coeficient" || props.type === "currency" || props.type === "utility") {
-    Input = (
+    Input = props?.isCombobox ? (
+      <AppCombobox
+        items={props.items}
+        selectedItem={props.selectedItem}
+        onChange={props.onChange as (value: ChoiceOption | null) => void}
+      />
+    ) : (
       <AppListbox
         items={props.items}
         selectedItem={props.selectedItem}

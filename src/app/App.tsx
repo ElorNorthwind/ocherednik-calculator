@@ -6,6 +6,7 @@ import LegalNotes from "@/widgets/LegalNotes/LegalNotes";
 
 function App() {
   useFixScreenSize();
+
   return (
     <Layout>
       <Calculator scales={scales} />

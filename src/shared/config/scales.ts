@@ -123,7 +123,7 @@ const area: ChoiceOption[] = [
   { id: 62, name: "Лефортово", unavailable: false, scale: 0.97, parentId: 5 },
   { id: 63, name: "Люблино", unavailable: false, scale: 0.91, parentId: 5 },
   { id: 64, name: "Марьино", unavailable: false, scale: 0.91, parentId: 5 },
-  { id: 65, name: "Некрасовка пос.", unavailable: false, scale: 0.56, parentId: 5 },
+  { id: 65, name: "Некрасовка", unavailable: false, scale: 0.56, parentId: 5 },
   { id: 66, name: "Печатники", unavailable: false, scale: 0.89, parentId: 5 },
   { id: 67, name: "Рязанский", unavailable: false, scale: 0.92, parentId: 5 },
   { id: 68, name: "Текстильщики", unavailable: false, scale: 0.92, parentId: 5 },
