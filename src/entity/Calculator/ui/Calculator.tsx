@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChoiceOption, Scales } from "@/shared/config/scales";
 import Results from "./Results";
 import CalculatorField from "@/widgets/CalculatorField/CalculatorField";
+import { Adress } from "@/shared/types/adresses";
+import AppSearchbar from "@/shared/ui/AppSearchbar/AppSearchbar";
+import getAdressDetails from "@/shared/lib/api/getAdressDetails";
 
 interface CalculatorProps {
   className?: string;
@@ -32,6 +35,56 @@ function Calculator(props: CalculatorProps) {
   };
   const [meters, setMeters] = useState<string | number | null>(null);
   const [repairsChoice, setRepairsChoice] = useState<ChoiceOption | null>(repairs[0]);
+  const [adress, setAdress] = useState<Adress | null>(null);
+
+  // Устанавливаем результаты поиска!
+  useEffect(() => {
+    const fetchAdressInfo = async () => {
+      const adressInfo = await getAdressDetails(adress?.id || "");
+
+      // console.log(JSON.stringify(adressInfo)); // Мясо идёт сюда
+
+      if (adressInfo?.ao && adressInfo?.ao !== "") {
+        setAoChoice(ao.find((item) => item.name === adressInfo.ao) || null);
+      }
+
+      if (adressInfo?.area && adressInfo?.area !== "") {
+        setAearChoice(area.find((item) => item.name === adressInfo.area) || null);
+      }
+
+      if (adressInfo?.year && adressInfo?.year !== "") {
+        const yearNum = Number(adressInfo?.year);
+        if (!isNaN(yearNum) && yearNum > 0) {
+          const age = new Date().getFullYear() - yearNum;
+          let wearChoice: ChoiceOption;
+          if (age < 5) {
+            wearChoice = wear[0];
+          } else if (age < 10) {
+            wearChoice = wear[1];
+          } else if (age < 20) {
+            wearChoice = wear[2];
+          } else if (age < 30) {
+            wearChoice = wear[3];
+          } else {
+            wearChoice = wear[4];
+          }
+          setWearChoice(wearChoice || null);
+        }
+      }
+
+      if (adressInfo?.series && adressInfo?.series !== "" && adressInfo?.series !== "нет данных") {
+        if (adressInfo?.series.toLowerCase().includes("индивид")) {
+          setSeriesChoice(series[1]);
+        } else {
+          setSeriesChoice(series[0]);
+        }
+      }
+    };
+
+    if (adress?.id && adress.id !== "") {
+      fetchAdressInfo();
+    }
+  }, [adress, ao, area, series, wear]);
 
   const result =
     (seriesChoice?.scale || 0) *
@@ -43,6 +96,7 @@ function Calculator(props: CalculatorProps) {
 
   return (
     <div className={`${className} my-3`}>
+      <AppSearchbar selectedItem={adress} onChange={setAdress} className="mb-1" />
       <h1 className="text-2xl md:text-3xl mb-1 font-serif text-red-600">Характеристики для расчёта</h1>
       <form
         className={`border-t pt-3 border-stone-400 grid  gap-0 md:gap-2 print:gap-2 items-center grid-cols-1 md:grid-cols-[max-content_1fr_max-content] print:grid-cols-[max-content_1fr_max-content] `}
@@ -82,21 +136,21 @@ function Calculator(props: CalculatorProps) {
         />
 
         <CalculatorField
-          labelText="лет на учёте"
-          badgeTitle="Кльгот"
-          type="coeficient"
-          items={years}
-          selectedItem={yearsChoice}
-          onChange={setYearsChoice}
-        />
-
-        <CalculatorField
           labelText="срок эксплуатации"
           badgeTitle="Кизн"
           type="coeficient"
           items={wear}
           selectedItem={wearChoice}
           onChange={setWearChoice}
+        />
+
+        <CalculatorField
+          labelText="лет на учёте"
+          badgeTitle="Кльгот"
+          type="coeficient"
+          items={years}
+          selectedItem={yearsChoice}
+          onChange={setYearsChoice}
         />
 
         <CalculatorField
