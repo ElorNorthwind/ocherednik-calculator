@@ -1,10 +1,11 @@
 import { Combobox, Transition } from "@headlessui/react";
-import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
+import { CheckIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useEffect, Fragment, useState, useMemo, useCallback } from "react";
 import { Adress } from "@/shared/types/adresses";
 import getAdressSearch from "@/shared/lib/api/getAdressSearch";
 import debounce from "@/shared/lib/debounce/debounce";
 import AppSpinner from "@/shared/ui/AppSpinner/AppSpinner";
+import getAdressDetails from "@/shared/lib/api/getAdressDetails";
 
 interface AppSearchbarProps<T> {
   selectedItem?: T | null;
@@ -14,18 +15,9 @@ interface AppSearchbarProps<T> {
 }
 
 function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearchbarProps<Adress>) {
-  const searchEmpty = useMemo<Adress>(
-    () => ({ id: 0, name: "Введите адрес для поиска", ao: "", area: "", unavailable: true }),
-    []
-  );
-  const noneFound = useMemo<Adress>(
-    () => ({ id: 0, name: "Адрес не найден", ao: "", area: "", unavailable: true }),
-    []
-  );
-  const searchPending = useMemo<Adress>(
-    () => ({ id: 0, name: "Загрузка...", ao: "", area: "", unavailable: true }),
-    []
-  );
+  const searchEmpty = useMemo<Adress>(() => ({ id: "0", text: "Введите адрес для поиска", unavailable: true }), []);
+  const noneFound = useMemo<Adress>(() => ({ id: "0", text: "Адрес не найден", unavailable: true }), []);
+  const searchPending = useMemo<Adress>(() => ({ id: "0", text: "Загрузка...", unavailable: true }), []);
 
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -37,11 +29,9 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
       if (adresses?.length && adresses.length > 0) {
         return adresses.map((adress) => {
           return {
-            id: adress?.Number || 0,
-            name: adress?.Cells?.SIMPLE_ADDRESS || "Некорректный адрес",
-            ao: adress?.Cells?.ADM_AREA || "АО",
-            area: adress?.Cells?.P5 || "Район",
-            unavailable: adress?.Number ? false : true,
+            id: adress?.id || "",
+            text: adress?.text || "Некорректный адрес",
+            unavailable: adress?.id !== "" ? false : true,
           };
         });
       } else return [noneFound];
@@ -59,7 +49,20 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
     };
 
     query === "" ? setFoundItems([searchEmpty]) : fetchData();
-  }, [query, searchEmpty, formatAdressSearch]);
+  }, [query, searchEmpty, formatAdressSearch, onChange]);
+
+  useEffect(() => {
+    const fetchAdressInfo = async () => {
+      setIsLoading(true);
+      const adressInfo = await getAdressDetails(selectedItem?.id || "");
+      console.log(JSON.stringify(adressInfo));
+      setIsLoading(false);
+    };
+
+    if (selectedItem?.id && selectedItem.id !== "") {
+      fetchAdressInfo();
+    }
+  }, [selectedItem]);
 
   const Option = (item: Adress) => (
     <Combobox.Option
@@ -69,7 +72,7 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
       className="flex px-2 py-1 ui-active:bg-stone-500 ui-active:text-white ui-not-active:ui-disabled:text-stone-300 ui-not-active:text-stone-800 ui-not-active:ui-disabled:cursor-default ui-not-active:cursor-pointer select-none"
     >
       <CheckIcon className="opacity-0 ui-selected:opacity-100 h-5 w-5 mr-2 text-stone-400" />
-      {isLoading ? <AppSpinner /> : item.name}
+      {isLoading ? <AppSpinner /> : item.text}
     </Combobox.Option>
   );
 
@@ -79,13 +82,13 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
         <div className="relative">
           <Combobox.Input
             as={Fragment}
-            onChange={debounce((e) => setQuery(e.target.value), 300)}
-            displayValue={(selectedItem: Adress) => selectedItem?.name || ""}
+            onChange={debounce((e) => setQuery(e.target.value), 250)}
+            displayValue={(selectedItem: Adress) => selectedItem?.text || ""}
           >
             <input
               type="text"
               autoComplete="off"
-              placeholder="выберете вариант"
+              placeholder="введите адрес"
               className={`text-left w-full bg-stone-100 text-stone-700 rounded px-3 py-2 appearance-none ${
                 !readOnly &&
                 "hover:bg-stone-200 active:bg-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500"
@@ -93,7 +96,7 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
             />
           </Combobox.Input>
           <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
-            <ChevronDownIcon
+            <MagnifyingGlassIcon
               className={`h-5 w-5 text-stone-400 ${readOnly && "text-stone-300"} print:hidden`}
               aria-hidden="true"
             />

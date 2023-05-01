@@ -1,7 +1,5 @@
 export interface Adress {
-  id: number;
-  name: string;
-  ao: string;
-  area: string;
+  id: string;
+  text: string;
   unavailable: boolean;
 }

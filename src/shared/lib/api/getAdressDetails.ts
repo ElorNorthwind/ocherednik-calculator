@@ -1,16 +1,10 @@
 import axios from "axios";
 
-export default async function getAdressSearch(term: string) {
+export default async function getAdressDetails(id: string) {
   const config = {
     method: "get",
     maxBodyLength: Infinity,
-    url: `${import.meta.env.VITE_API_URL}/adress`,
-    params: {
-      term: term,
-    },
-    // headers: {
-    //   "Content-Type": "application/json",
-    // },
+    url: `${import.meta.env.VITE_API_URL}/adress/${id}`,
   };
 
   try {
