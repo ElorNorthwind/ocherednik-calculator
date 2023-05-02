@@ -98,7 +98,7 @@ const area: ChoiceOption[] = [
   { id: 37, name: "Ростокино", unavailable: false, scale: 0.98, parentId: 3 },
   { id: 38, name: "Свиблово", unavailable: false, scale: 0.95, parentId: 3 },
   { id: 39, name: "Северное Медведково", unavailable: false, scale: 0.91, parentId: 3 },
-  { id: 40, name: "Северный пос.", unavailable: false, scale: 0.66, parentId: 3 },
+  { id: 40, name: "Северный", unavailable: false, scale: 0.66, parentId: 3 },
   { id: 41, name: "Южное Медведково", unavailable: false, scale: 0.94, parentId: 3 },
   { id: 42, name: "Ярославский", unavailable: false, scale: 0.9, parentId: 3 },
   { id: 43, name: "Богородское", unavailable: false, scale: 0.96, parentId: 4 },

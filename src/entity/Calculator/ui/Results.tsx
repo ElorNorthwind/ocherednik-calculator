@@ -22,16 +22,16 @@ function Results(props: ResultsProps) {
   );
 
   const text = (
-    <span className={`flex justify-between flex-col w-full`}>
+    <span className={`flex justify-between flex-col w-full relative`}>
       <span
-        className={`block absoulte print:text-right transition-all duration-300 ${
-          fullData ? "-translate-y-6" : "translate-y-0"
+        className={`block absoulte w-full print:text-right transition-all duration-300 ${
+          fullData ? "-translate-y-6 whitespace-nowrap" : "translate-y-0"
         }`}
       >
         {fullData ? "Примерная стоимость помещения:" : "Заполните характеристики для расчёта примерной стоимости"}
       </span>
       <span
-        className={`absolute block text-4xl text-red-600 whitespace-nowrap print:text-right transition-opacity delay-100 duration-300 ${
+        className={`block absolute w-full whitespace-nowrap text-4xl text-red-600 print:text-right transition-opacity delay-100 duration-300 ${
           fullData ? "opacity-100" : "opacity-0"
         }`}
       >

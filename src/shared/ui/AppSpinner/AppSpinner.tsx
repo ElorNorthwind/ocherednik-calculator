@@ -1,8 +1,12 @@
 import cls from "./AppSpinner.module.css";
 
-export default function AppSpinner() {
+interface AppSpinnerProps {
+  className?: string;
+}
+
+export default function AppSpinner({ className }: AppSpinnerProps) {
   return (
-    <div className={cls.spinner}>
+    <div className={`${cls.spinner} ${className}`}>
       <div></div>
       <div></div>
       <div></div>

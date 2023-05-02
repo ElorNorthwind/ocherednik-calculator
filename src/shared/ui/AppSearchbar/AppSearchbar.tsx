@@ -1,5 +1,5 @@
 import { Combobox, Transition } from "@headlessui/react";
-import { CheckIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { CheckIcon, MagnifyingGlassIcon, XCircleIcon } from "@heroicons/react/20/solid";
 import { useEffect, Fragment, useState, useMemo, useCallback } from "react";
 import { Adress } from "@/shared/types/adresses";
 import getAdressSearch from "@/shared/lib/api/getAdressSearch";
@@ -58,12 +58,12 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
       className="flex px-2 py-1 ui-active:bg-stone-500 ui-active:text-white ui-not-active:ui-disabled:text-stone-300 ui-not-active:text-stone-800 ui-not-active:ui-disabled:cursor-default ui-not-active:cursor-pointer select-none"
     >
       <CheckIcon className="opacity-0 ui-selected:opacity-100 h-5 w-5 mr-2 text-stone-400" />
-      {isLoading ? <AppSpinner /> : item.text}
+      {isLoading ? <AppSpinner className={`mx-auto`} /> : item.text}
     </Combobox.Option>
   );
 
   return (
-    <div className={`w-full relative ${className}`}>
+    <div className={`w-full relative print:hidden ${className}`}>
       <Combobox value={selectedItem} by="id" onChange={onChange} disabled={readOnly}>
         <div className="relative">
           <Combobox.Input
@@ -81,6 +81,14 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
               }`}
             />
           </Combobox.Input>
+          <button
+            onClick={() => onChange(null)}
+            className={`absolute inset-y-0 right-8 flex items-center pr-2 transition-opacity duration-300 ${
+              selectedItem ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <XCircleIcon className="h-5 w-5 text-stone-300" />
+          </button>
           <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
             <MagnifyingGlassIcon
               className={`h-5 w-5 text-stone-400 ${readOnly && "text-stone-300"} print:hidden`}

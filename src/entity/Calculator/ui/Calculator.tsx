@@ -5,6 +5,7 @@ import CalculatorField from "@/widgets/CalculatorField/CalculatorField";
 import { Adress } from "@/shared/types/adresses";
 import AppSearchbar from "@/shared/ui/AppSearchbar/AppSearchbar";
 import getAdressDetails from "@/shared/lib/api/getAdressDetails";
+import AppSpinner from "@/shared/ui/AppSpinner/AppSpinner";
 
 interface CalculatorProps {
   className?: string;
@@ -36,20 +37,24 @@ function Calculator(props: CalculatorProps) {
   const [meters, setMeters] = useState<string | number | null>(null);
   const [repairsChoice, setRepairsChoice] = useState<ChoiceOption | null>(repairs[0]);
   const [adress, setAdress] = useState<Adress | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Устанавливаем результаты поиска!
   useEffect(() => {
     const fetchAdressInfo = async () => {
+      setIsLoading(true);
       const adressInfo = await getAdressDetails(adress?.id || "");
-
-      // console.log(JSON.stringify(adressInfo)); // Мясо идёт сюда
 
       if (adressInfo?.ao && adressInfo?.ao !== "") {
         setAoChoice(ao.find((item) => item.name === adressInfo.ao) || null);
+      } else {
+        setAoChoice(null);
       }
 
       if (adressInfo?.area && adressInfo?.area !== "") {
         setAearChoice(area.find((item) => item.name === adressInfo.area) || null);
+      } else {
+        setAearChoice(null);
       }
 
       if (adressInfo?.year && adressInfo?.year !== "") {
@@ -70,6 +75,8 @@ function Calculator(props: CalculatorProps) {
           }
           setWearChoice(wearChoice || null);
         }
+      } else {
+        setWearChoice(null);
       }
 
       if (adressInfo?.series && adressInfo?.series !== "" && adressInfo?.series !== "нет данных") {
@@ -78,7 +85,10 @@ function Calculator(props: CalculatorProps) {
         } else {
           setSeriesChoice(series[0]);
         }
+      } else {
+        setSeriesChoice(null);
       }
+      setIsLoading(false);
     };
 
     if (adress?.id && adress.id !== "") {
@@ -97,10 +107,19 @@ function Calculator(props: CalculatorProps) {
   return (
     <div className={`${className} my-3`}>
       <AppSearchbar selectedItem={adress} onChange={setAdress} className="mb-1" />
-      <h1 className="text-2xl md:text-3xl mb-1 font-serif text-red-600">Характеристики для расчёта</h1>
+      <h1 className="text-2xl md:text-3xl mb-1 font-serif text-red-600 whitespace-nowrap">
+        Характеристики для расчёта
+      </h1>
       <form
         className={`border-t pt-3 border-stone-400 grid  gap-0 md:gap-2 print:gap-2 items-center grid-cols-1 md:grid-cols-[max-content_1fr_max-content] print:grid-cols-[max-content_1fr_max-content] `}
       >
+        {isLoading && (
+          <div
+            className={` z-10 absolute top-[6.1rem] h-[19rem] md:h-[12.6rem] inset-x-0  backdrop-blur flex justify-center`}
+          >
+            <AppSpinner className={`my-auto`} />
+          </div>
+        )}
         <CalculatorField
           labelText="округ"
           badgeTitle=""
