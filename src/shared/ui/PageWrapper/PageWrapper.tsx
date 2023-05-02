@@ -8,6 +8,8 @@ export default function PageWrapper(props: PageWrapperProps) {
   const { children } = props;
 
   return (
-    <div className="relative w-full h-full min-h-screen md:w-3/4 max-w-3xl bg-white shadow-xl mx-auto">{children}</div>
+    <div className="relative w-full h-full min-h-screen md:w-3/4 max-w-3xl bg-white shadow-xl print:shadow-none print:mt-6 mx-auto">
+      {children}
+    </div>
   );
 }
