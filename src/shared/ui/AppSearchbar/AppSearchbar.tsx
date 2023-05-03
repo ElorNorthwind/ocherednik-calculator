@@ -1,5 +1,5 @@
 import { Combobox, Transition } from "@headlessui/react";
-import { CheckIcon, MagnifyingGlassIcon, XCircleIcon } from "@heroicons/react/20/solid";
+import { CheckIcon, MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { useEffect, Fragment, useState, useMemo, useCallback } from "react";
 import { Adress } from "@/shared/types/adresses";
 import getAdressSearch from "@/shared/lib/api/getAdressSearch";
@@ -65,7 +65,11 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
   return (
     <div className={`w-full relative print:hidden ${className}`}>
       <Combobox value={selectedItem} by="id" onChange={onChange} disabled={readOnly}>
-        <div className="relative">
+        <div
+          className={`relative flex flex-row bg-stone-100 text-stone-700 rounded  ${
+            !readOnly && "hover:bg-stone-200 active:bg-stone-300 focus-within:ring-1 focus-within:ring-stone-500"
+          }`}
+        >
           <Combobox.Input
             as={Fragment}
             onChange={debounce((e) => setQuery(e.target.value), 250)}
@@ -75,23 +79,22 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
               type="text"
               autoComplete="off"
               placeholder="поиск по адресу"
-              className={`text-left w-full bg-stone-100 text-stone-700 rounded px-3 py-2 appearance-none ${
-                !readOnly &&
-                "hover:bg-stone-200 active:bg-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500"
-              }`}
+              className={`text-left w-full focus:outline-none bg-transparent px-3 py-2`}
             />
           </Combobox.Input>
-          <button
-            onClick={() => onChange(null)}
-            className={`absolute inset-y-0 right-8 flex items-center pr-2 transition-opacity duration-300 ${
-              selectedItem ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
-          >
-            <XCircleIcon className="h-5 w-5 text-stone-300" />
-          </button>
-          <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+          {selectedItem && (
+            <button
+              onClick={() => onChange(null)}
+              className={`flex items-center px-1 transition-opacity duration-300 ${
+                selectedItem ? "opacity-100" : "opacity-0 pointer-events-none"
+              }`}
+            >
+              <XMarkIcon className="h-5 w-5 text-stone-400 hover:text-stone-500 print:hidden" />
+            </button>
+          )}
+          <Combobox.Button className="flex items-center pl-1 pr-2">
             <MagnifyingGlassIcon
-              className={`h-5 w-5 text-stone-400 ${readOnly && "text-stone-300"} print:hidden`}
+              className={`h-5 w-5 text-stone-400 hover:text-stone-500 ${readOnly && "text-stone-300 "} print:hidden`}
               aria-hidden="true"
             />
           </Combobox.Button>
