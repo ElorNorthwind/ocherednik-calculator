@@ -48,7 +48,7 @@ function Results(props: ResultsProps) {
 
   return (
     <div
-      className={`${className} min-h-28 relative group w-full mt-3 p-6 bg-orange-50 grid grid-cols-1 md:grid-cols-[max-content_1fr] items-center gap-3 md:gap-6 overflow-hidden print:border-t print:border-stone-400`}
+      className={`${className} min-h-28 relative group w-full mt-3 p-6 bg-orange-50 print:bg-transparent grid grid-cols-1 md:grid-cols-[max-content_1fr] items-center gap-3 md:gap-6 overflow-hidden print:border-t print:border-stone-400`}
     >
       <PrinterIcon
         className={`z-3 h-12 w-12 absolute right-3 top-3 stroke-orange-200 stroke-[1.6] block transition-opacity duration-300 ${

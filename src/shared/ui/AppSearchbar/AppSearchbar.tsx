@@ -66,10 +66,16 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
     <div className={`w-full relative print:hidden ${className}`}>
       <Combobox value={selectedItem} by="id" onChange={onChange} disabled={readOnly}>
         <div
-          className={`relative flex flex-row bg-stone-100 text-stone-700 rounded  ${
+          className={`relative gap-1 px-2 flex flex-row bg-stone-100 text-stone-700 rounded  ${
             !readOnly && "hover:bg-stone-200 active:bg-stone-300 focus-within:ring-1 focus-within:ring-stone-500"
           }`}
         >
+          <Combobox.Button className="flex items-center">
+            <MagnifyingGlassIcon
+              className={`h-5 w-5 text-stone-400 hover:text-stone-500 ${readOnly && "text-stone-300 "} print:hidden`}
+              aria-hidden="true"
+            />
+          </Combobox.Button>
           <Combobox.Input
             as={Fragment}
             onChange={debounce((e) => setQuery(e.target.value), 250)}
@@ -79,7 +85,7 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
               type="text"
               autoComplete="off"
               placeholder="поиск по адресу"
-              className={`text-left w-full focus:outline-none bg-transparent px-3 py-2`}
+              className={`text-left w-full focus:outline-none bg-transparent py-2`}
             />
           </Combobox.Input>
           <Transition
@@ -92,16 +98,10 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
             leaveFrom="opacity-100"
             leaveTo="opacity-0 pointer-events-none"
           >
-            <button onClick={() => onChange(null)} className={`flex items-center px-1`}>
+            <button onClick={() => onChange(null)} className={`flex items-center`}>
               <XMarkIcon className="h-5 w-5 text-stone-400 hover:text-stone-500 print:hidden" />
             </button>
           </Transition>
-          <Combobox.Button className="flex items-center pl-1 pr-2">
-            <MagnifyingGlassIcon
-              className={`h-5 w-5 text-stone-400 hover:text-stone-500 ${readOnly && "text-stone-300 "} print:hidden`}
-              aria-hidden="true"
-            />
-          </Combobox.Button>
         </div>
         <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
           <Combobox.Options className="z-10 absolute mt-1 max-h-[90vh] w-full overflow-auto rounded bg-stone-100 py-1 text-base shadow ring-1 ring-black ring-opacity-5 focus:outline-none">
