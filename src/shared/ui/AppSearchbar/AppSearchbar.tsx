@@ -84,7 +84,7 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
           <button
             onClick={() => onChange(null)}
             className={`absolute inset-y-0 right-8 flex items-center pr-2 transition-opacity duration-300 ${
-              selectedItem ? "opacity-100" : "opacity-0"
+              selectedItem ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
           >
             <XCircleIcon className="h-5 w-5 text-stone-300" />

@@ -102,6 +102,7 @@ function Calculator(props: CalculatorProps) {
     (wearChoice?.scale || 0) *
     (areaChoice?.scale || 0) *
     (repairsChoice?.scale || 0) *
+    (komnChoice?.scale || 0) *
     (Number(meters) || 0);
 
   return (
