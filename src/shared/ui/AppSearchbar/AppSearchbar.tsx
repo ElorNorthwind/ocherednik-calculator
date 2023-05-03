@@ -82,16 +82,20 @@ function AppSearchbar({ selectedItem, onChange, className, readOnly }: AppSearch
               className={`text-left w-full focus:outline-none bg-transparent px-3 py-2`}
             />
           </Combobox.Input>
-          {selectedItem && (
-            <button
-              onClick={() => onChange(null)}
-              className={`flex items-center px-1 transition-opacity duration-300 ${
-                selectedItem ? "opacity-100" : "opacity-0 pointer-events-none"
-              }`}
-            >
+          <Transition
+            as={Fragment}
+            show={!!selectedItem}
+            enter="transition-opacity duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity duration-250"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0 pointer-events-none"
+          >
+            <button onClick={() => onChange(null)} className={`flex items-center px-1`}>
               <XMarkIcon className="h-5 w-5 text-stone-400 hover:text-stone-500 print:hidden" />
             </button>
-          )}
+          </Transition>
           <Combobox.Button className="flex items-center pl-1 pr-2">
             <MagnifyingGlassIcon
               className={`h-5 w-5 text-stone-400 hover:text-stone-500 ${readOnly && "text-stone-300 "} print:hidden`}
