@@ -38,8 +38,8 @@ const wear: ChoiceOption[] = [
 ];
 
 const series: ChoiceOption[] = [
-  { id: 1, name: "типовая", unavailable: false, scale: 74341.79 },
-  { id: 2, name: "индивидуальная", unavailable: false, scale: 115907.99 },
+  { id: 1, name: "типовая", unavailable: false, scale: 79174.00 },
+  { id: 2, name: "индивидуальная", unavailable: false, scale: 131997.09 },
 ];
 
 const ao: ChoiceOption[] = [
